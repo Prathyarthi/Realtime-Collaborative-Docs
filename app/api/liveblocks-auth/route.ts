@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     const user = {
         id,
         info: {
+            id,
             name: `${firstName} ${lastName}`,
             email: emailAddresses[0].emailAddress,
             avatar: imageUrl,
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
     const { status, body } = await liveblocks.identifyUser(
         {
             userId: user.info.email,
-            groupIds: []
+            groupIds: [],
         },
         { userInfo: user.info },
     );

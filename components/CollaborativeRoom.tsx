@@ -7,7 +7,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react/suspense'
 import React from 'react'
 
-function CollaborativeRoom({ children }: { children: React.ReactNode }) {
+function CollaborativeRoom() {
     return (
         <RoomProvider id="my-room">
             <ClientSideSuspense fallback={<div>Loading…</div>}>
