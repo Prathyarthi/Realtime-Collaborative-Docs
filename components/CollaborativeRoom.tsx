@@ -11,17 +11,18 @@ import { Input } from "./ui/input"
 import Image from "next/image"
 import { updateDocument } from "@/lib/actions/room.actions"
 import Loader from "./Loader"
+import { metadata } from "@/app/layout"
 
 function CollaborativeRoom({ roomId, roomMetadata }: CollaborativeRoomProps) {
 
     const currentUserType = 'editor'
 
-    const [documentTitle, setDocumentTitle] = useState('Unitled Document')
+    const [documentTitle, setDocumentTitle] = useState(roomMetadata.title)
     const [editing, setEditing] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const containerRef = useRef<HTMLDivElement>(null)
-    const inputRef = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const updateTitleHandler = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -77,7 +78,7 @@ function CollaborativeRoom({ roomId, roomMetadata }: CollaborativeRoomProps) {
                                     ref={inputRef}
                                     onChange={(e) => setDocumentTitle(e.target.value)}
                                     onKeyDown={updateTitleHandler}
-                                    disable={!editing}
+                                    disabled={!editing}
                                     className="document-title-input"
                                 />
                             ) : (

@@ -36,7 +36,7 @@ export const createDocument = async ({ userId, email }: CreateDocumentParams) =>
 
 export const getDocument = async ({ roomId, userId }: { roomId: string, userId: string }) => {
     try {
-        const room = liveblocks.getRoom(roomId)
+        const room = await liveblocks.getRoom(roomId)
 
         // const hasAccess = Object.keys((await room).usersAccesses).includes(userId)
 
@@ -53,7 +53,7 @@ export const getDocument = async ({ roomId, userId }: { roomId: string, userId: 
 
 export const updateDocument = async (roomId: string, title: string) => {
     try {
-        const updateRoom = liveblocks.updateRoom(roomId, {
+        const updateRoom = await liveblocks.updateRoom(roomId, {
             metadata: {
                 title
             }
@@ -69,7 +69,7 @@ export const updateDocument = async (roomId: string, title: string) => {
 
 export const getDocuments = async (email: string) => {
     try {
-        const rooms = liveblocks.getRooms({ userId: email })
+        const rooms = await liveblocks.getRooms({ userId: email })
 
         return parseStringify(rooms);
     } catch (error) {

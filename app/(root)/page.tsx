@@ -15,6 +15,8 @@ export default async function Home() {
   if (!clerkUser) redirect('/sign-in')
 
   const roomDocuments = await getDocuments(clerkUser.emailAddresses[0].emailAddress)
+  console.log(roomDocuments.data);
+
 
   return (
     <main className="home-container">
