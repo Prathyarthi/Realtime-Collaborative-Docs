@@ -12,6 +12,7 @@ import Image from "next/image"
 import { updateDocument } from "@/lib/actions/room.actions"
 import Loader from "./Loader"
 import { metadata } from "@/app/layout"
+import ShareModal from "./ShareModal"
 
 function CollaborativeRoom({ roomId, roomMetadata, users, currentUserType }: CollaborativeRoomProps) {
 
@@ -97,6 +98,14 @@ function CollaborativeRoom({ roomId, roomMetadata, users, currentUserType }: Col
                         </div>
                         <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
                             <ActiveCollaborators />
+
+                            <ShareModal
+                                roomId={roomId}
+                                collaborators={users}
+                                creatorId={roomMetadata.creatorId}
+                                currentUserType={currentUserType}
+                            />
+
                             <SignedOut>
                                 <SignInButton />
                             </SignedOut>
