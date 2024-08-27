@@ -12,7 +12,7 @@ function Collaborator({ roomId, email, creatorId, collaborator, user }: Collabor
 
     }
 
-    const removeDocumentHandler = async (email: string) => {
+    const removeCollaboratorHandler = async (email: string) => {
 
     }
     return (
