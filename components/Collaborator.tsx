@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import SelectUserType from './SelectUserType'
 import { Button } from './ui/button'
+import { removeCollaborator, updateDocumentAccess } from '@/lib/actions/room.actions'
 
 function Collaborator({ roomId, email, creatorId, collaborator, user }: CollaboratorProps) {
 
@@ -9,11 +10,15 @@ function Collaborator({ roomId, email, creatorId, collaborator, user }: Collabor
     const [loading, setLoading] = useState(false)
 
     const shareDocumentHandler = async (type: string) => {
-
+        setLoading(true)
+        await updateDocumentAccess({ roomId, email, userType: type as UserType, updatedBy: user })
+        setLoading(false)
     }
 
     const removeCollaboratorHandler = async (email: string) => {
-
+        setLoading(true)
+        await removeCollaborator({ roomId, email })
+        setLoading(false)
     }
     return (
         <li className='flex items-center justify-between gap-2 py-3'>
@@ -37,7 +42,7 @@ function Collaborator({ roomId, email, creatorId, collaborator, user }: Collabor
             ) : (
                 <div className='flex items-center'>
                     <SelectUserType userType={userType as UserType} setUserType={setUserType || 'viewer'} onClickHandler={shareDocumentHandler} />
-                    <Button type='button' onClick={() => removeDocumentHandler(collaborator.email)}>Remove</Button>
+                    <Button type='button' onClick={() => removeCollaboratorHandler(collaborator.email)}>Remove</Button>
                 </div>
             )}
         </li>
